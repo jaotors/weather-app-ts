@@ -1,7 +1,9 @@
-export default function Home() {
+import WeatherForm from './_components/weather-form'
+
+export default function Home(): JSX.Element {
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      test
+    <main className='flex justify-center items-center h-[100vh] w-full'>
+      <WeatherForm />
     </main>
-  );
+  )
 }
