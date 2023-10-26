@@ -4,6 +4,7 @@ Updating my current knowledge on [Next.js](https://nextjs.org/)
 Tech Stack:
 - [Next.js](https://nextjs.org/)
 - [TailwindCSS](https://tailwindcss.com/)
+- [Typescript](https://www.typescriptlang.org/)
 
 ## Getting Started
 
