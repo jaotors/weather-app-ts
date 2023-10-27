@@ -15,10 +15,10 @@ const WeatherForm = (): JSX.Element => {
     useState<GeoLocationOptionType | null>(null)
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const value = evt.target.value.trim()
+    const value = evt.target.value
     setKeyword(value)
 
-    const query = `q=${value.trim()}&limit=5&appid=${
+    const query = `q=${value}&limit=5&appid=${
       process.env.NEXT_PUBLIC_WEATHER_API_KEY
     }`
     const fetchUrl = `${GEO_API_URL}?${query}`
@@ -69,7 +69,7 @@ const WeatherForm = (): JSX.Element => {
                 onClick={() => handleOptionSelect(option)}
                 className='text-left text-sm w-full hover:bg-zinc-700 hover:text-white px-2 py-1'
               >
-                {option.name}
+                {option.name}, {option.country}
               </button>
             </li>
           ))}
