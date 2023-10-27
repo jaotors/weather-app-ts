@@ -23,7 +23,7 @@ export default async function Weather({
 }: {
   params: { city: string[] }
 }) {
-  const [city, lat, lon] = params.city
+  const [_, lat, lon] = params.city
   const query = `lat=${lat}&lon=${lon}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`
   const fetchUrl = `${WEATHER_API_URL}?${query}`
 
