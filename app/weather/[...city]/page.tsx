@@ -55,8 +55,8 @@ export default async function Weather({
               {today.weather[0].main} {today.weather[0].description}
             </p>
             <p className='text-sm'>
-              H: <Degree temp={Math.ceil(today.main.temp_max)} />
-              L: <Degree temp={Math.floor(today.main.temp_min)} />
+              H: <Degree temp={Math.ceil(today.main.temp_max)} /> L:
+              <Degree temp={Math.floor(today.main.temp_min)} />
             </p>
           </section>
 
