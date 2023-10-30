@@ -25,3 +25,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## References
 - https://theultimateapichallenge.com/challenges/weather-typescript-api
+
+## Versions
+- NodeJS `18.12.0`
+- Yarn `1.22.17`
