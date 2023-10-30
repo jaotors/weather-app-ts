@@ -1,41 +1,14 @@
 'use client'
 
-import { useState, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 import type { GeoLocationOptionType } from '../_types'
-
-const GEO_API_URL = 'http://api.openweathermap.org/geo/1.0/direct'
+import useWeatherInputChange from '../_hooks/use-weather-input-change'
 
 const WeatherForm = (): JSX.Element => {
   const router = useRouter()
-  const [keyword, setKeyword] = useState<string>('')
-  const [options, setOptions] = useState<[]>([])
-  const [selectedOption, setSlectedOption] =
-    useState<GeoLocationOptionType | null>(null)
-
-  const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const value = evt.target.value
-    setKeyword(value)
-
-    const query = `q=${value}&limit=5&appid=${
-      process.env.NEXT_PUBLIC_WEATHER_API_KEY
-    }`
-    const fetchUrl = `${GEO_API_URL}?${query}`
-
-    if (value === '') return
-
-    fetch(fetchUrl)
-      .then((response) => response.json())
-      .then((data) => setOptions(data))
-  }
-
-  const handleOptionSelect = (option: GeoLocationOptionType) => {
-    setKeyword(option.name)
-    setSlectedOption(option)
-    setOptions([])
-  }
-
+  const { keyword, selectedOption, options, onInputChange, onOptionSelect } =
+    useWeatherInputChange()
 
   const handleSearch = () => {
     if (selectedOption === null) return
@@ -59,14 +32,14 @@ const WeatherForm = (): JSX.Element => {
         <input
           type='text'
           value={keyword}
-          onChange={handleInputChange}
+          onChange={onInputChange}
           className='px-2 py-1 rounded-l-md border-2 border-white text-zinc-500'
         />
         <ul className='absolute top-9 bg-white ml-1 rounded-b-md text-zinc-500'>
           {options.map((option: GeoLocationOptionType, index: number) => (
             <li key={`${option.name} - ${index}`}>
               <button
-                onClick={() => handleOptionSelect(option)}
+                onClick={() => onOptionSelect(option)}
                 className='text-left text-sm w-full hover:bg-zinc-700 hover:text-white px-2 py-1'
               >
                 {option.name}, {option.country}

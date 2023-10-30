@@ -4,7 +4,7 @@ import Tile from '@/app/_components/tile'
 import Sunrise from '@/app/_components/icons/sunrise'
 import Sunset from '@/app/_components/icons/sunset'
 
-import type { ForecastType } from '@/app/_types'
+import getForecast from '@/app/_api/getForecast'
 
 import {
   getFeelsLike,
@@ -16,26 +16,13 @@ import {
   getWindDirection,
 } from '@/app/_helpers'
 
-const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/forecast'
-
 export default async function Weather({
   params,
 }: {
   params: { city: string[] }
 }) {
   const [_, lat, lon] = params.city
-  const query = `lat=${lat}&lon=${lon}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`
-  const fetchUrl = `${WEATHER_API_URL}?${query}`
-
-  const forecastData: ForecastType = await fetch(fetchUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data)
-      return {
-        ...data.city,
-        list: data.list.slice(0, 16),
-      }
-    })
+  const forecastData = await getForecast(lat, lon)
 
   const today = forecastData.list[0]
 
